@@ -1,6 +1,19 @@
 # apigee_edge_analytics_extractor
 Permite extraer analiticas de una organizacion y sus ambientes. Esto por mes, segmentado por API Proxy.
 
+
+### Estructura del respositorio y archivos:
+```
+.
+└── apigee_edge_analytics_extractor/
+    ├── analytics.csv - el archivo donde queda el resultado de las analiticas.
+    ├── apigee_details.json - aqui se configuran los detalles de la organizacion en donde se debe gatillar el proceso de extraccion.
+    ├── extract_analytics.py - el script que orquesta el proceso de extraccion.
+    ├── functions.py - funciones invocadas para el proceso de extraccion.
+    └── README.md - documentacion.
+```
+
+---
 ### Pre-requisitos:
 
 * Python3
@@ -12,6 +25,8 @@ Permite extraer analiticas de una organizacion y sus ambientes. Esto por mes, se
 
 A continuacion se muestra la informacion requerida para el proceso de extraccion. Se deben reemplazar los valores del archivo json por los valores de la organizacion y ambiente del cual se quiere hacer la extraccion.
 
+
+**apigee_details.json:**
 
 ```json
 {
@@ -37,7 +52,7 @@ Este Json debe modificarse y guardarse teniendo como referencia el siguiente det
 | pass         | La clave que utilizas para acceder a Apigee.                                                            |
 | time_range   | El intervalo de tiempo del cual se desea extraer la informacion ej: 07/01/2022 00:00~07/31/2022 23:59   |
 
-
+**Nota:** El usuario y contraseña no se utilizan en el proceso de extraccion. El script genera un access token con el cual se gatillan las llamadas a Apigee Edge Management APIs.
 
 ---
 ### Ejecutar la Extraccion:
