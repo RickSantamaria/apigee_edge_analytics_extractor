@@ -25,9 +25,11 @@ def generate_access_token(user, password):
 
 
 #crea el csv con la data analitica estructurada
-def create_analytics_csv(rows):
+def create_analytics_csv(rows, env, month, year):
     header = ['organization','environment','apiproxy','transactions','time_range']
-    with open('analytics.csv', 'w', encoding='UTF8') as f:
+    file_name = "{env}-{month}-{year}.csv".format(env=env, month=month, year=year)
+    
+    with open(file_name, 'w', encoding='UTF8') as f:
         writer = csv.writer(f)
         
         # write the header
@@ -41,7 +43,7 @@ def create_analytics_csv(rows):
 def populate_org_details():
     with open('apigee_details.json') as fp:
         listObj = json.load(fp)
-    return listObj['org'],listObj['environments'],listObj['user'],listObj['pass'], listObj['time_range']
+    return listObj['org'],listObj['environments'],listObj['user'],listObj['pass'], listObj['year'], listObj['starting_month'],listObj['ending_month'],listObj['complete_year']
 
 
 #Extrae las analiticas de la organizacion segmentado por API
